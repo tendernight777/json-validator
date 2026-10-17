@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Validate JSON data against a JSON Schema in your browser."
+    />
+    <title>Schema Lab — JSON Schema Validator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/monaco-editor@0.52.2/min/vs/editor/editor.main.css"
+    />
+    <link rel="stylesheet" href="./styles.css?v=11" />
+    <script type="module" src="./app.js?v=9"></script>
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="./" aria-label="Schema Lab home">
+        <img
+          class="brand-logo"
+          src="./resources/PHR-consortium.png"
+          alt="PHR Consortium"
+        />
+        <h1 class="header-title">JSON Schema Validator</h1>
+      </a>
+      <div class="privacy-note">
+        <span class="privacy-dot" aria-hidden="true"></span>
+        Runs locally in your browser
+      </div>
+    </header>
+
+    <main class="page">
+      <section class="workspace" aria-label="JSON schema validation workspace">
+        <div class="editors">
+          <section class="editor-card" aria-labelledby="schema-heading">
+            <div class="editor-header">
+              <div class="editor-title">
+                <span class="file-icon schema-icon" aria-hidden="true">S</span>
+                <div>
+                  <h2 id="schema-heading">JSON Schema</h2>
+                  <span class="editor-subtitle">schema.json</span>
+                </div>
+              </div>
+              <span class="dialect">Draft-07</span>
+            </div>
+            <div
+              id="schema-input"
+              class="monaco-host"
+              role="region"
+              aria-label="JSON Schema editor"
+              aria-describedby="schema-hint"
+            >Loading editor…</div>
+            <div class="editor-footer" id="schema-hint">
+              JSON Schema Draft-07
+              <div class="editor-footer-actions">
+                <button class="text-button" id="format-schema" type="button">
+                  Format
+                </button>
+                <button class="text-button" id="save-schema" type="button">
+                  Save
+                </button>
+              </div>
+            </div>
+          </section>
+
+          <section class="editor-card" aria-labelledby="json-heading">
+            <div class="editor-header">
+              <div class="editor-title">
+                <span class="file-icon json-icon" aria-hidden="true">{ }</span>
+                <div>
+                  <h2 id="json-heading">JSON data</h2>
+                  <span class="editor-subtitle">data.json</span>
+                </div>
+              </div>
+              <span class="data-label">INPUT</span>
+            </div>
+            <div
+              id="json-input"
+              class="monaco-host"
+              role="region"
+              aria-label="JSON data editor"
+              aria-describedby="json-hint"
+            >Loading editor…</div>
+            <div class="editor-footer" id="json-hint">
+              <span id="json-size">0 characters</span>
+              <div class="editor-footer-actions">
+                <button class="text-button" id="format-json" type="button">
+                  Format
+                </button>
+                <button class="text-button" id="save-json" type="button">
+                  Save
+                </button>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <div class="action-bar">
+          <div class="action-load-controls">
+            <button class="secondary-button" id="load-example" type="button">
+              Load example
+            </button>
+            <div class="schema-presets">
+              <label for="schema-selector">Load a schema</label>
+              <select id="schema-selector" aria-describedby="preset-status">
+                <option value="">Select a JSON Schema…</option>
+                <option value="blood-pressure-4.0.json">Blood Pressure</option>
+                <option value="body-temperature-4.0.json">Body Temperature</option>
+                <option value="physical-activity-1.0.json">Physical Activity</option>
+              </select>
+              <span class="preset-status" id="preset-status" role="status"></span>
+            </div>
+          </div>
+          <div class="action-buttons">
+            <button class="primary-button" id="validate" type="button">
+              <span aria-hidden="true">▶</span>
+              Validate JSON
+            </button>
+            <div class="action-help">
+              <span class="keycap">Ctrl</span><span class="keycap">↵</span>
+              <span>to validate</span>
+            </div>
+          </div>
+        </div>
+
+        <section
+          class="results-card"
+          id="results"
+          aria-live="polite"
+          aria-atomic="true"
+        >
+          <div class="results-empty">
+            <span class="result-symbol" aria-hidden="true">✓</span>
+            <div>
+              <h2>Ready when you are</h2>
+              <p>Your validation result will show up here.</p>
+            </div>
+          </div>
+        </section>
+
+        <details class="registry">
+          <summary>
+            <span>Local schema registry</span>
+            <span class="registry-count" id="registry-count">0 saved</span>
+          </summary>
+          <div class="registry-content">
+            <p>
+              Download external references to this browser for reuse, including
+              offline. Sources must allow CORS. For blocked sources, import JSON
+              schema files with matching <code>$id</code> values.
+            </p>
+            <div class="registry-actions">
+              <button class="secondary-button" id="download-refs" type="button">
+                Download references
+              </button>
+              <label class="secondary-button import-button" for="import-schemas">
+                Import schema files
+              </label>
+              <input
+                id="import-schemas"
+                class="visually-hidden"
+                type="file"
+                accept=".json,application/json"
+                multiple
+              />
+            </div>
+            <p class="registry-status" id="registry-status" role="status"></p>
+            <ul class="registry-list" id="registry-list"></ul>
+          </div>
+        </details>
+      </section>
+
+      <footer class="page-footer">
+        <span>Powered by <strong>Ajv</strong> · JSON Schema Draft-07</span>
+        <span>External schemas are stored locally in this browser</span>
+      </footer>
+    </main>
+    <dialog class="confirm-dialog" id="load-example-dialog" aria-labelledby="load-example-title" aria-describedby="load-example-message">
+      <h2 id="load-example-title">Replace current contents?</h2>
+      <p id="load-example-message">
+        Loading the example will discard your edited contents. Continue?
+      </p>
+      <form method="dialog" class="confirm-actions">
+        <button class="secondary-button" type="submit" value="cancel" autofocus>
+          Cancel
+        </button>
+        <button class="secondary-button" type="submit" value="confirm">
+          Load example
+        </button>
+      </form>
+    </dialog>
+  </body>
+</html>
