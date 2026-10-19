@@ -52,7 +52,7 @@ function initializeEditors() {
             tabSize: 2,
             fontFamily: '"DM Mono", Consolas, monospace',
             fontSize: 12,
-            lineHeight: 22,
+            lineHeight: 18,
             padding: { top: 14, bottom: 12 },
             renderLineHighlight: "line",
             formatOnPaste: true,
@@ -82,8 +82,8 @@ function initializeEditors() {
           const updateEditorDensity = () => {
             const compact = compactEditorMedia.matches;
             const options = compact
-              ? { fontSize: 12, lineHeight: 14, padding: { top: 8, bottom: 8 } }
-              : { fontSize: 12, lineHeight: 22, padding: { top: 14, bottom: 12 } };
+              ? { fontSize: 12, lineHeight: 12, padding: { top: 8, bottom: 8 } }
+              : { fontSize: 12, lineHeight: 18, padding: { top: 14, bottom: 12 } };
             schemaEditor.updateOptions(options);
             jsonEditor.updateOptions(options);
           };
