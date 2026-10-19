@@ -67,7 +67,7 @@ button {
 .brand-logo {
   display: block;
   width: auto;
-  height: 38px;
+  height: 30px;
   object-fit: contain;
 }
 
@@ -645,7 +645,7 @@ button {
   }
 
   .brand-logo {
-    height: 30px;
+    height: 29px;
   }
 
   .header-title {
@@ -680,7 +680,7 @@ button {
   }
 
   .brand-logo {
-    height: 27px;
+    height: 26px;
   }
 
   .header-title {
